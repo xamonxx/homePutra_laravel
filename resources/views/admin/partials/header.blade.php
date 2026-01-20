@@ -15,17 +15,18 @@
 
     {{-- Right: Utilities --}}
     <div class="flex items-center gap-4">
-        {{-- Search (Visual) --}}
-        <div class="hidden md:flex items-center h-10 px-4 bg-white/5 border border-white/5 rounded-full focus-within:border-primary/50 focus-within:bg-white/10 transition-all w-64 group">
-            <span class="material-symbols-outlined text-gray-500 group-focus-within:text-primary transition-colors text-xl">search</span>
-            <input type="text" placeholder="Cari data..." class="bg-transparent border-none text-sm text-white placeholder-gray-500 focus:ring-0 w-full ml-2 h-full outline-none">
-        </div>
-
         {{-- Notifications --}}
-        <button class="relative w-10 h-10 rounded-full bg-white/5 border border-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:border-primary/50 hover:bg-primary/5 transition-all group">
+        <a href="{{ route('admin.messages.index') }}" class="relative w-10 h-10 rounded-full bg-white/5 border border-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:border-primary/50 hover:bg-primary/5 transition-all group">
             <span class="material-symbols-outlined group-hover:animate-swing">notifications</span>
-            <span class="absolute top-2.5 right-2.5 w-2 h-2 bg-red-500 rounded-full border border-[#0B0D11]"></span>
-        </button>
+            @if($unreadMessagesCount > 0)
+            <span class="absolute -top-1 -right-1 flex h-5 w-5">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-5 w-5 bg-red-500 text-[10px] font-bold text-white items-center justify-center border-2 border-[#0B0D11]">
+                    {{ $unreadMessagesCount > 99 ? '99+' : $unreadMessagesCount }}
+                </span>
+            </span>
+            @endif
+        </a>
 
         {{-- Date Display (Desktop) --}}
         <div class="hidden lg:flex items-center gap-3 pl-4 border-l border-white/5">
@@ -33,7 +34,7 @@
                 <p class="text-xs font-bold text-white">{{ now()->format('H:i') }}</p>
                 <p class="text-[10px] text-gray-500">{{ now()->format('d M Y') }}</p>
             </div>
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-gray-800 to-black border border-white/5 flex items-center justify-center">
+            <div class="w-10 h-10 rounded-xl bg-linear-to-br from-gray-800 to-black border border-white/5 flex items-center justify-center">
                 <span class="material-symbols-outlined text-gray-400 text-lg">calendar_today</span>
             </div>
         </div>

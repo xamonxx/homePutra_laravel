@@ -22,10 +22,27 @@ const initReveal = () => {
     document.querySelectorAll('[data-aos]').forEach(el => observer.observe(el));
 };
 
-// Inisialisasi animasi pada desktop
-if (window.innerWidth >= 1024) {
-    document.addEventListener('DOMContentLoaded', initReveal);
-}
+// FIXED: Initialize animations on ALL devices (not just desktop)
+// For mobile/tablet: immediately show elements to improve performance
+document.addEventListener('DOMContentLoaded', function () {
+    const isMobile = window.innerWidth < 768;
+    const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
+
+    if (isMobile || isTablet) {
+        // On mobile/tablet: immediately make all AOS elements visible
+        // This prevents elements from being hidden due to AOS initialization issues
+        document.querySelectorAll('[data-aos]').forEach(el => {
+            el.classList.add('aos-animate');
+            // Remove AOS attributes to prevent conflicts
+            el.removeAttribute('data-aos');
+            el.removeAttribute('data-aos-delay');
+            el.removeAttribute('data-aos-duration');
+        });
+    } else {
+        // On desktop: use intersection observer for smooth reveal
+        initReveal();
+    }
+});
 
 // Preloader Handler
 window.addEventListener('load', function () {

@@ -3,7 +3,7 @@
     Features: Serif Italic Titles (Elegant), Clean Sans Details, High Legibility
 --}}
 
-<section class="py-24 bg-[#0a0c10] relative overflow-hidden" id="portfolio">
+<section class="py-24 bg-background-dark relative overflow-hidden" id="portfolio">
     {{-- Ambient Light --}}
     <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 blur-[150px] rounded-full pointer-events-none opacity-50"></div>
     <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-white/5 blur-[100px] rounded-full pointer-events-none opacity-30"></div>
@@ -17,7 +17,7 @@
                     <span class="text-[10px] uppercase tracking-[0.2em] text-gray-300 font-bold">Masterpieces</span>
                 </div>
                 <h2 class="text-4xl md:text-6xl text-white font-serif leading-tight">
-                    Curated <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#FFD700] to-[#B8860B] italic pr-2">Works</span>
+                    Curated <span class="text-transparent bg-clip-text bg-linear-to-r from-[#FFD700] to-[#B8860B] italic pr-2">Works</span>
                 </h2>
             </div>
 
@@ -47,7 +47,7 @@
             $delay = $key * 100;
             @endphp
 
-            <div class="{{ $colSpan }} group relative rounded-3xl overflow-hidden cursor-pointer" data-aos="fade-up" data-aos-delay="{{ $delay }}">
+            <a href="{{ isset($item->id) ? route('portfolio.show', $item->id) : '#' }}" class="{{ $colSpan }} group relative rounded-3xl overflow-hidden cursor-pointer block" data-aos="fade-up" data-aos-delay="{{ $delay }}">
 
                 {{-- Image --}}
                 <div class="absolute inset-0 overflow-hidden">
@@ -57,7 +57,7 @@
                 </div>
 
                 {{-- Overlay --}}
-                <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent opacity-90 transition-opacity duration-300"></div>
+                <div class="absolute inset-0 bg-linear-to-t from-black/95 via-black/40 to-transparent opacity-90 transition-opacity duration-300"></div>
 
                 {{-- Content --}}
                 <div class="absolute inset-0 p-8 flex flex-col justify-end z-20">
@@ -84,7 +84,7 @@
 
                 {{-- Border Glow --}}
                 <div class="absolute inset-0 border border-white/10 rounded-3xl group-hover:border-primary/30 transition-colors pointer-events-none z-30"></div>
-            </div>
+            </a>
             @endforeach
         </div>
     </div>

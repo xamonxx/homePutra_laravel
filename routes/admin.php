@@ -111,6 +111,14 @@ Route::middleware(['admin'])->group(function () {
             'destroy' => 'admin.messages.destroy',
         ]);
 
+    // Statistics Management
+    Route::resource('statistics', \App\Http\Controllers\Admin\StatisticController::class)->except(['create', 'show', 'edit'])->names([
+        'index' => 'admin.statistics.index',
+        'store' => 'admin.statistics.store',
+        'update' => 'admin.statistics.update',
+        'destroy' => 'admin.statistics.destroy',
+    ]);
+
     // Settings
     Route::get('/settings', [SettingController::class, 'index'])->name('admin.settings.index');
     Route::put('/settings', [SettingController::class, 'update'])->name('admin.settings.update');

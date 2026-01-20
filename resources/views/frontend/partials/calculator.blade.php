@@ -3,9 +3,9 @@
     Features: Real-time price estimation, Product/Material selection, API integration
 --}}
 
-<section class="py-24 bg-[#0a0c10] relative" id="calculator">
+<section class="py-24 bg-background-dark relative" id="calculator">
     {{-- Background elements --}}
-    <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_var(--tw-gradient-stops))] from-primary/5 via-[#0a0c10] to-[#0a0c10] overflow-hidden"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,var(--tw-gradient-stops))] from-primary/5 via-background-dark to-background-dark overflow-hidden"></div>
 
     <div class="max-w-7xl mx-auto px-6 relative z-10">
         {{-- Header --}}
@@ -61,12 +61,12 @@
                 <div class="space-y-4">
                     <label class="text-sm font-bold text-gray-300 uppercase tracking-wider block">Ukuran (Meter Lari)</label>
                     <div class="flex items-center gap-4">
-                        <button type="button" onclick="quickAdjustLength(-0.5)" class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 text-white text-xl font-bold hover:bg-primary hover:text-black hover:border-primary transition-all flex-shrink-0">−</button>
+                        <button type="button" onclick="quickAdjustLength(-0.5)" class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 text-white text-xl font-bold hover:bg-primary hover:text-black hover:border-primary transition-all shrink-0">−</button>
                         <div class="flex-1 relative">
                             <input type="number" id="quickLengthInput" min="0.5" max="20" step="0.5" value="3" class="w-full bg-[#151515] border border-white/10 rounded-xl px-4 py-4 text-white text-center text-2xl font-bold focus:outline-none focus:border-primary transition-colors">
                             <span class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 font-medium">meter</span>
                         </div>
-                        <button type="button" onclick="quickAdjustLength(0.5)" class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 text-white text-xl font-bold hover:bg-primary hover:text-black hover:border-primary transition-all flex-shrink-0">+</button>
+                        <button type="button" onclick="quickAdjustLength(0.5)" class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 text-white text-xl font-bold hover:bg-primary hover:text-black hover:border-primary transition-all shrink-0">+</button>
                     </div>
                     <input type="range" id="quickLengthSlider" min="0.5" max="20" step="0.5" value="3" class="w-full h-2 bg-gray-700 rounded-full appearance-none cursor-pointer accent-primary">
                 </div>
@@ -171,7 +171,7 @@
 </section>
 
 {{-- TOAST NOTIFICATION CONTAINER --}}
-<div id="quickToastContainer" class="fixed top-24 right-6 z-[99999] flex flex-col gap-4 pointer-events-none"></div>
+<div id="quickToastContainer" class="fixed top-24 right-6 z-99999 flex flex-col gap-4 pointer-events-none"></div>
 
 <style>
     /* Shake Animation for Input Error */

@@ -6,7 +6,7 @@
 @section('content')
 
 {{-- Welcome Banner --}}
-<div class="mb-8 relative overflow-hidden rounded-2xl bg-gradient-to-r from-primary/20 to-transparent p-1 border border-primary/10">
+<div class="mb-8 relative overflow-hidden rounded-2xl bg-linear-to-r from-primary/20 to-transparent p-1 border border-primary/10">
     <div class="relative z-10 glass-card bg-black/40 rounded-xl p-6 flex flex-col md:flex-row items-center justify-between gap-6">
         <div>
             <h2 class="text-2xl font-bold text-white mb-2">Selamat Datang, {{ auth()->user()->display_name ?? 'Admin' }}! 👋</h2>

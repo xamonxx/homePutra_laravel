@@ -54,7 +54,7 @@
                         <div>
                             <label class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Tanggal Selesai</label>
                             <input type="date" name="completion_date" value="{{ old('completion_date') }}"
-                                class="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-primary/50 focus:bg-black/40 transition-all [color-scheme:dark]">
+                                class="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-primary/50 focus:bg-black/40 transition-all scheme-dark">
                         </div>
                     </div>
                 </div>
@@ -107,7 +107,7 @@
                 <a href="{{ route('admin.portfolio.index') }}" class="px-6 py-3 rounded-xl bg-white/5 border border-white/10 text-gray-300 font-bold hover:bg-white/10 transition-colors">
                     Batal
                 </a>
-                <button type="submit" class="flex-1 px-6 py-3 rounded-xl bg-gradient-to-r from-primary to-yellow-600 text-black font-bold uppercase tracking-wider hover:shadow-lg hover:shadow-primary/20 hover:scale-[1.01] transition-all flex items-center justify-center gap-2">
+                <button type="submit" class="flex-1 px-6 py-3 rounded-xl bg-linear-to-r from-primary to-yellow-600 text-black font-bold uppercase tracking-wider hover:shadow-lg hover:shadow-primary/20 hover:scale-[1.01] transition-all flex items-center justify-center gap-2">
                     <span class="material-symbols-outlined">save</span>
                     Simpan Project
                 </button>

@@ -16,7 +16,7 @@
 
         {{-- Complex Gradient Overlay --}}
         <div class="absolute inset-0 bg-linear-to-r from-black/90 via-black/50 to-transparent z-10"></div>
-        <div class="absolute inset-0 bg-linear-to-t from-[#0a0c10] via-transparent to-black/40 z-10"></div>
+        <div class="absolute inset-0 bg-linear-to-t from-background-dark via-transparent to-black/40 z-10"></div>
     </div>
 
     {{-- Content --}}
@@ -25,7 +25,7 @@
 
             {{-- Top Tagline --}}
             <div data-aos="fade-down" class="flex items-center gap-3">
-                <div class="h-[1px] w-12 bg-primary/50 hidden md:block"></div>
+                <div class="h-px w-12 bg-primary/50 hidden md:block"></div>
                 <span class="text-primary text-xs md:text-sm font-bold uppercase tracking-[0.3em] drop-shadow-lg">#1 Jasa Interior Design</span>
             </div>
 
@@ -68,7 +68,7 @@
     {{-- Vertical Scroll Indicator --}}
     <div class="hidden md:flex absolute right-12 bottom-12 flex-col items-center gap-4 z-20">
         <span class="text-[9px] uppercase tracking-[0.3em] text-white/50 rotate-90 origin-right translate-x-3">Scroll Down</span>
-        <div class="w-[1px] h-24 bg-linear-to-b from-white/50 to-transparent"></div>
+        <div class="w-px h-24 bg-linear-to-b from-white/50 to-transparent"></div>
     </div>
 </header>
 

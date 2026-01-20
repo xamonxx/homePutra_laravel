@@ -1,6 +1,6 @@
 {{-- Services Section - Premium Responsive Design --}}
 
-<section class="py-20 sm:py-28 md:py-36 bg-[#0a0c10] relative overflow-hidden" id="services">
+<section class="py-20 sm:py-28 md:py-36 bg-background-dark relative overflow-hidden" id="services">
     {{-- Background Elements --}}
     <div class="absolute inset-0 pointer-events-none">
         <div class="absolute top-[20%] -left-[10%] w-[600px] h-[600px] bg-primary/5 blur-[150px] rounded-full"></div>
@@ -26,10 +26,10 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
             @forelse($services as $index => $service)
             <div class="group relative h-full" data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
-                <div class="relative h-full p-6 sm:p-8 bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:bg-white/[0.08] hover:border-primary/30 transition-all duration-300">
+                <div class="relative h-full p-6 sm:p-8 bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:bg-white/8 hover:border-primary/30 transition-all duration-300">
 
                     {{-- Icon Background --}}
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary/10 to-transparent rounded-bl-[100px] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-linear-to-br from-primary/10 to-transparent rounded-bl-[100px] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
                     {{-- Icon --}}
                     <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-primary group-hover:text-black transition-all duration-300">
@@ -58,8 +58,8 @@
             ['title' => 'Consultation', 'desc' => 'Diskusi mendalam untuk menemukan solusi terbaik.', 'icon' => 'chat']
             ] as $idx => $s)
             <div class="group relative h-full" data-aos="fade-up" data-aos-delay="{{ $idx * 100 }}">
-                <div class="relative h-full p-6 sm:p-8 bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:bg-white/[0.08] hover:border-primary/30 transition-all duration-300">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary/10 to-transparent rounded-bl-[100px] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="relative h-full p-6 sm:p-8 bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:bg-white/8 hover:border-primary/30 transition-all duration-300">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-linear-to-br from-primary/10 to-transparent rounded-bl-[100px] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
                     <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-primary group-hover:text-black transition-all duration-300">
                         <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl group-hover:text-black transition-colors">{{ $s['icon'] }}</span>
@@ -96,7 +96,7 @@
                 ['num' => '04', 'title' => 'Instalasi', 'icon' => 'check_circle']
                 ] as $step)
                 <div class="relative z-10 flex flex-col items-center text-center group">
-                    <div class="w-16 h-16 rounded-full bg-[#0a0c10] border-2 border-white/10 flex items-center justify-center mb-4 group-hover:border-primary group-hover:shadow-[0_0_20px_rgba(255,178,4,0.3)] transition-all duration-300">
+                    <div class="w-16 h-16 rounded-full bg-background-dark border-2 border-white/10 flex items-center justify-center mb-4 group-hover:border-primary group-hover:shadow-[0_0_20px_rgba(255,178,4,0.3)] transition-all duration-300">
                         <span class="material-symbols-outlined text-gray-400 group-hover:text-primary transition-colors">{{ $step['icon'] }}</span>
                     </div>
                     <span class="text-primary text-xs font-bold mb-1">{{ $step['num'] }}</span>

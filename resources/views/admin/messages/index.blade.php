@@ -32,7 +32,7 @@
             </thead>
             <tbody class="divide-y divide-white/5 text-sm">
                 @forelse($messages as $item)
-                <tr class="group hover:bg-white/[0.02] transition-colors {{ $item->is_read ? 'opacity-75' : 'bg-blue-500/5' }}">
+                <tr class="group hover:bg-white/2 transition-colors {{ $item->is_read ? 'opacity-75' : 'bg-blue-500/5' }}">
                     <td class="p-6">
                         <div class="flex items-center gap-4">
                             <div class="w-10 h-10 rounded-full bg-linear-to-br from-blue-500 to-cyan-600 flex items-center justify-center text-white font-bold text-lg shadow-lg">

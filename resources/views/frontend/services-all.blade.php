@@ -44,7 +44,7 @@
             $delay = ($index % 3) * 100;
             @endphp
             <div class="group" data-aos="fade-up" data-aos-delay="{{ $delay }}">
-                <div class="h-full p-6 sm:p-8 bg-white/5 border border-white/10 rounded-2xl hover:border-primary/30 hover:bg-white/[0.08] transition-all duration-300">
+                <div class="h-full p-6 sm:p-8 bg-white/5 border border-white/10 rounded-2xl hover:border-primary/30 hover:bg-white/8 transition-all duration-300">
 
                     {{-- Icon --}}
                     <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-xl {{ $color[0] }} flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300">
@@ -90,7 +90,7 @@
             $delay = ($index % 3) * 100;
             @endphp
             <div class="group relative" data-aos="fade-up" data-aos-delay="{{ $delay }}">
-                <div class="h-full p-6 sm:p-8 bg-white/5 border border-white/10 rounded-2xl hover:border-primary/30 hover:bg-white/[0.08] transition-all duration-300">
+                <div class="h-full p-6 sm:p-8 bg-white/5 border border-white/10 rounded-2xl hover:border-primary/30 hover:bg-white/8 transition-all duration-300">
 
                     <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-xl {{ $color[0] }} flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300">
                         <span class="material-symbols-outlined {{ $color[1] }} text-2xl sm:text-3xl">{{ $service['icon'] }}</span>

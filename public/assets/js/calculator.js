@@ -79,7 +79,7 @@ function renderProducts() {
     grid.innerHTML = calcState.data.products.map((p, i) => `
         <label class="product-option cursor-pointer group">
             <input type="radio" name="product" value="${p.id}" data-slug="${p.slug}" class="hidden" ${i === 0 ? 'checked' : ''}>
-            <div class="border-2 ${i === 0 ? 'border-primary bg-primary/10' : 'border-white/10 bg-white/[0.02]'} rounded-xl p-5 text-center transition-all group-hover:border-primary/50 h-full">
+            <div class="border-2 ${i === 0 ? 'border-primary bg-primary/10' : 'border-white/10 bg-white/2'} rounded-xl p-5 text-center transition-all group-hover:border-primary/50 h-full">
                 <span class="material-symbols-outlined text-3xl ${i === 0 ? 'text-primary' : 'text-gray-400'} mb-2 block">${icons[p.slug] || p.icon}</span>
                 <div class="text-white text-sm font-medium">${p.name}</div>
             </div>
@@ -97,12 +97,12 @@ function renderProducts() {
             calcState.product = parseInt(this.value);
             document.querySelectorAll('.product-option > div').forEach(d => {
                 d.classList.remove('border-primary', 'bg-primary/10');
-                d.classList.add('border-white/10', 'bg-white/[0.02]');
+                d.classList.add('border-white/10', 'bg-white/2');
                 d.querySelector('.material-symbols-outlined').classList.remove('text-primary');
                 d.querySelector('.material-symbols-outlined').classList.add('text-gray-400');
             });
             this.nextElementSibling.classList.add('border-primary', 'bg-primary/10');
-            this.nextElementSibling.classList.remove('border-white/10', 'bg-white/[0.02]');
+            this.nextElementSibling.classList.remove('border-white/10', 'bg-white/2');
             this.nextElementSibling.querySelector('.material-symbols-outlined').classList.add('text-primary');
             this.nextElementSibling.querySelector('.material-symbols-outlined').classList.remove('text-gray-400');
             updateProductPreview();
@@ -198,7 +198,7 @@ function renderMaterials() {
     grid.innerHTML = calcState.data.materials.map((m, i) => `
         <label class="material-option cursor-pointer group">
             <input type="radio" name="material" value="${m.id}" class="hidden" ${i === 0 ? 'checked' : ''}>
-            <div class="border-2 ${i === 0 ? 'border-primary bg-primary/10' : 'border-white/10 bg-white/[0.02]'} rounded-xl p-5 transition-all group-hover:border-primary/50">
+            <div class="border-2 ${i === 0 ? 'border-primary bg-primary/10' : 'border-white/10 bg-white/2'} rounded-xl p-5 transition-all group-hover:border-primary/50">
                 <div class="flex items-center justify-between mb-3">
                     <span class="text-white font-semibold">${m.name}</span>
                     <span class="text-xs ${gradeColors[m.grade]} font-bold px-2 py-1 rounded">Grade ${m.grade}</span>
@@ -221,10 +221,10 @@ function renderMaterials() {
             calcState.material = parseInt(this.value);
             document.querySelectorAll('.material-option > div').forEach(d => {
                 d.classList.remove('border-primary', 'bg-primary/10');
-                d.classList.add('border-white/10', 'bg-white/[0.02]');
+                d.classList.add('border-white/10', 'bg-white/2');
             });
             this.nextElementSibling.classList.add('border-primary', 'bg-primary/10');
-            this.nextElementSibling.classList.remove('border-white/10', 'bg-white/[0.02]');
+            this.nextElementSibling.classList.remove('border-white/10', 'bg-white/2');
             updateLivePrice();
         });
     });
@@ -288,7 +288,7 @@ function renderModels() {
     grid.innerHTML = calcState.data.models.map((m, i) => `
         <label class="model-option cursor-pointer group">
             <input type="radio" name="model" value="${m.id}" class="hidden" ${i === 0 ? 'checked' : ''}>
-            <div class="border-2 ${i === 0 ? 'border-primary bg-primary/10' : 'border-white/10 bg-white/[0.02]'} rounded-xl py-4 px-3 text-center transition-all group-hover:border-primary/50">
+            <div class="border-2 ${i === 0 ? 'border-primary bg-primary/10' : 'border-white/10 bg-white/2'} rounded-xl py-4 px-3 text-center transition-all group-hover:border-primary/50">
                 <span class="text-white text-sm font-medium">${m.name}</span>
             </div>
         </label>
@@ -303,10 +303,10 @@ function renderModels() {
             calcState.model = parseInt(this.value);
             document.querySelectorAll('.model-option > div').forEach(d => {
                 d.classList.remove('border-primary', 'bg-primary/10');
-                d.classList.add('border-white/10', 'bg-white/[0.02]');
+                d.classList.add('border-white/10', 'bg-white/2');
             });
             this.nextElementSibling.classList.add('border-primary', 'bg-primary/10');
-            this.nextElementSibling.classList.remove('border-white/10', 'bg-white/[0.02]');
+            this.nextElementSibling.classList.remove('border-white/10', 'bg-white/2');
             updateLivePrice(false); // Don't show loader when changing model
         });
     });
@@ -326,7 +326,7 @@ function renderAdditionalCosts() {
     }
 
     const html = calcState.data.additionalCosts.map(c => `
-        <label class="flex items-center gap-4 p-5 bg-white/[0.03] border border-white/10 rounded-xl cursor-pointer hover:border-primary/50 transition-all group">
+        <label class="flex items-center gap-4 p-5 bg-white/3 border border-white/10 rounded-xl cursor-pointer hover:border-primary/50 transition-all group">
             <input type="checkbox" name="additional_cost" value="${c.id}" class="w-6 h-6 rounded-lg border-2 border-gray-600 text-primary focus:ring-primary focus:ring-offset-0 bg-transparent">
             <div class="flex-1">
                 <span class="text-white font-semibold block">${c.name}</span>
@@ -554,7 +554,7 @@ function showToastNotification(message, type = 'warning') {
     const iconColor = type === 'success' ? 'text-green-500' : 'text-primary';
 
     toast.innerHTML = `
-        <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center flex-shrink-0">
+        <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center shrink-0">
             <span class="material-symbols-outlined ${iconColor} text-lg">${iconName}</span>
         </div>
         <div>

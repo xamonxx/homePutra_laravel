@@ -54,7 +54,7 @@
             </thead>
             <tbody class="divide-y divide-white/5 text-sm">
                 @forelse($testimonials as $item)
-                <tr class="group hover:bg-white/[0.02] transition-colors">
+                <tr class="group hover:bg-white/2 transition-colors">
                     <td class="p-6 text-center text-gray-500 font-mono">{{ $loop->iteration }}</td>
 
                     <td class="p-6">

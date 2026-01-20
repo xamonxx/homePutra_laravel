@@ -44,7 +44,7 @@
                 <a href="{{ route('admin.services.index') }}" class="px-6 py-3 rounded-xl bg-white/5 border border-white/10 text-gray-300 font-bold hover:bg-white/10 transition-colors">
                     Batal
                 </a>
-                <button type="submit" class="flex-1 px-6 py-3 rounded-xl bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold uppercase tracking-wider hover:shadow-lg hover:shadow-green-500/20 hover:scale-[1.01] transition-all flex items-center justify-center gap-2">
+                <button type="submit" class="flex-1 px-6 py-3 rounded-xl bg-linear-to-r from-green-500 to-emerald-600 text-white font-bold uppercase tracking-wider hover:shadow-lg hover:shadow-green-500/20 hover:scale-[1.01] transition-all flex items-center justify-center gap-2">
                     <span class="material-symbols-outlined">save</span>
                     Simpan Layanan
                 </button>

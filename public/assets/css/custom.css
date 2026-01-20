@@ -181,6 +181,7 @@
     padding: 2px;
     background: linear-gradient(135deg, #ffb204, transparent 50%, #ffb204);
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     animation: borderRotate 4s linear infinite;
@@ -311,9 +312,55 @@ input[type="range"]::-moz-range-thumb {
         color: black !important;
     }
 }
+
 .text-gold-gradient {
     background-image: linear-gradient(to right, #ffb204, #FFD700);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+}
+
+/* ============================================
+   MOBILE/TABLET: Force all AOS elements visible
+   This fixes elements not appearing on smaller screens
+   ============================================ */
+@media screen and (max-width: 1023px) {
+
+    /* Force all AOS elements to be visible */
+    [data-aos] {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+        pointer-events: auto !important;
+        visibility: visible !important;
+    }
+
+    /* Ensure animated elements are visible */
+    [data-aos^="fade"],
+    [data-aos^="zoom"],
+    [data-aos^="slide"],
+    [data-aos^="flip"] {
+        opacity: 1 !important;
+        transform: translate3d(0, 0, 0) scale(1) !important;
+    }
+
+    /* Override any reveal animations */
+    .reveal {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+    }
+
+    /* Disable heavy effects on mobile for better performance */
+    .morph-bg {
+        animation: none !important;
+    }
+
+    .cursor-follower {
+        display: none !important;
+    }
+
+    /* Ensure buttons and interactive elements are always visible */
+    .hover-lift {
+        transform: none !important;
+    }
 }

@@ -36,7 +36,7 @@
     <div class="relative w-full max-w-[400px] z-10 transition-all duration-700 ease-out transform translate-y-0 opacity-100">
         {{-- Brand --}}
         <div class="text-center mb-10">
-            <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-tr from-surface-dark to-black border border-white/10 rounded-2xl shadow-2xl shadow-primary/10 mb-6 relative group cursor-default">
+            <div class="inline-flex items-center justify-center w-20 h-20 bg-linear-to-tr from-surface-dark to-black border border-white/10 rounded-2xl shadow-2xl shadow-primary/10 mb-6 relative group cursor-default">
                 <div class="absolute inset-0 bg-primary/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <span class="material-symbols-outlined text-4xl text-primary relative z-10">verified_user</span>
             </div>
@@ -99,7 +99,7 @@
 
                     <button
                         type="submit"
-                        class="w-full h-12 bg-gradient-to-r from-primary to-yellow-600 hover:to-primary text-black font-bold uppercase tracking-wider rounded-xl shadow-lg shadow-primary/20 hover:shadow-primary/40 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2 mt-2">
+                        class="w-full h-12 bg-linear-to-r from-primary to-yellow-600 hover:to-primary text-black font-bold uppercase tracking-wider rounded-xl shadow-lg shadow-primary/20 hover:shadow-primary/40 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2 mt-2">
                         <span>Sign In Securely</span>
                         <span class="material-symbols-outlined text-lg">arrow_forward</span>
                     </button>

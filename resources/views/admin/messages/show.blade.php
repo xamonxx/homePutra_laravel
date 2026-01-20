@@ -8,7 +8,7 @@
 <div class="max-w-4xl mx-auto">
     <div class="glass-card rounded-2xl border border-white/5 overflow-hidden">
         {{-- Header --}}
-        <div class="p-8 border-b border-white/5 bg-white/[0.02]">
+        <div class="p-8 border-b border-white/5 bg-white/2">
             <div class="flex items-start justify-between gap-4">
                 <div class="flex items-center gap-4">
                     <div class="w-14 h-14 rounded-full bg-linear-to-br from-blue-500 to-cyan-600 flex items-center justify-center text-white font-bold text-2xl shadow-lg shadow-blue-500/20">
@@ -50,7 +50,7 @@
         </div>
 
         {{-- Actions --}}
-        <div class="p-6 border-t border-white/5 bg-white/[0.02] flex items-center justify-between">
+        <div class="p-6 border-t border-white/5 bg-white/2 flex items-center justify-between">
             <a href="{{ route('admin.messages.index') }}" class="px-4 py-2 rounded-lg hover:bg-white/5 text-gray-400 hover:text-white transition-colors flex items-center gap-2 text-sm font-bold">
                 <span class="material-symbols-outlined">arrow_back</span>
                 Kembali

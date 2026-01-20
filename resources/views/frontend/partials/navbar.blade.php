@@ -82,78 +82,89 @@
 </style>
 
 {{-- NAVBAR WRAPPER --}}
-<nav id="main-nav" class="god-nav fixed top-0 w-full z-[99999] transition-all duration-300 bg-transparent h-20 flex items-center">
+<nav id="main-nav" class="god-nav fixed top-0 w-full z-99999 transition-all duration-300 bg-transparent h-20 flex items-center">
     <div class="max-w-7xl w-full mx-auto px-6 lg:px-8 flex items-center justify-between">
 
         {{-- LOGO --}}
-        <a href="{{ route('home') }}" class="flex items-center gap-3 relative z-[100000]">
-            <div class="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center text-primary border border-white/10 backdrop-blur-sm">
-                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 3L4 9v12h5v-7h6v7h5V9l-8-6z"></path>
-                </svg>
+        <a href="{{ route('home') }}" class="flex items-center gap-3 relative z-100000">
+            <div class="w-10 h-10 rounded-xl bg-white/9 flex items-center justify-center border border-white/10 backdrop-blur-sm">
+                <img src="{{ asset('assets/images/logo.png') }}" alt="Home Putra Logo" class="w-30 h-auto object-contain">
             </div>
-            <span class="text-white font-bold text-xl tracking-tight">HomePutra</span>
+            <span class="text-white font-bold text-xl tracking-tight">Home Putra <span class="text-primary italic">Interior</span></span>
         </a>
 
         {{-- DESKTOP MENU --}}
-        <div class="hidden lg:flex items-center gap-1 z-[100000]">
+        <div class="hidden lg:flex items-center gap-1 z-100000">
 
             {{-- Service Dropdown --}}
-            <div class="relative group h-20 flex items-center px-1">
-                <a href="{{ route('services.all') }}" class="flex items-center gap-1 px-4 py-2 text-gray-300 hover:text-white font-medium transition-colors">
-                    Layanan <span class="material-symbols-outlined text-[18px] opacity-70">expand_more</span>
+            <div class="relative group h-20 flex items-center px-2">
+                <a href="{{ route('services.all') }}" class="group/link relative flex items-center gap-1 px-2 py-2 text-gray-300 hover:text-white font-medium transition-colors">
+                    <span>Layanan</span>
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover/link:w-full"></span>
+                    <span class="material-symbols-outlined text-[18px] opacity-70 group-hover/link:rotate-180 transition-transform duration-300">expand_more</span>
                 </a>
 
                 {{-- Dropdown Body --}}
-                <div class="god-dropdown absolute top-[70px] left-1/2 -translate-x-1/2 w-[600px] bg-[#111] border border-white/10 rounded-xl p-6 shadow-2xl">
+                <div class="god-dropdown absolute top-[70px] left-1/2 -translate-x-1/2 w-[600px] bg-[#0A0C10] border border-white/5 rounded-xl p-6 shadow-2xl backdrop-blur-xl">
                     <div class="grid grid-cols-2 gap-6">
                         <div class="space-y-1">
-                            <h4 class="text-xs font-bold text-gray-500 uppercase tracking-widest px-3 mb-2">Kategori</h4>
-                            <a href="{{ route('home') }}#services" class="flex items-center gap-3 p-3 rounded-lg hover:bg-white/5 transition-colors group/item">
-                                <span class="material-symbols-outlined text-gray-500 group-hover/item:text-primary">home</span>
+                            <h4 class="text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em] px-3 mb-3">Kategori</h4>
+                            <a href="{{ route('home') }}#services" class="flex items-center gap-4 p-3 rounded-lg hover:bg-white/5 transition-all group/item border border-transparent hover:border-white/5">
+                                <span class="material-symbols-outlined text-gray-500 group-hover/item:text-primary transition-colors">home</span>
                                 <div>
-                                    <div class="text-white font-bold text-sm">Residensial</div>
-                                    <div class="text-xs text-gray-500">Interior Rumah</div>
+                                    <div class="text-white font-bold text-sm group-hover/item:translate-x-1 transition-transform">Residensial</div>
+                                    <div class="text-[10px] text-gray-500">Interior Rumah</div>
                                 </div>
                             </a>
-                            <a href="{{ route('home') }}#services" class="flex items-center gap-3 p-3 rounded-lg hover:bg-white/5 transition-colors group/item">
-                                <span class="material-symbols-outlined text-gray-500 group-hover/item:text-primary">storefront</span>
+                            <a href="{{ route('home') }}#services" class="flex items-center gap-4 p-3 rounded-lg hover:bg-white/5 transition-all group/item border border-transparent hover:border-white/5">
+                                <span class="material-symbols-outlined text-gray-500 group-hover/item:text-primary transition-colors">storefront</span>
                                 <div>
-                                    <div class="text-white font-bold text-sm">Komersial</div>
-                                    <div class="text-xs text-gray-500">Kantor & Usaha</div>
+                                    <div class="text-white font-bold text-sm group-hover/item:translate-x-1 transition-transform">Komersial</div>
+                                    <div class="text-[10px] text-gray-500">Kantor & Usaha</div>
                                 </div>
                             </a>
                         </div>
-                        <div class="bg-gradient-to-br from-white/5 to-transparent rounded-lg p-5 border border-white/5">
-                            <span class="bg-primary text-black text-[10px] font-bold px-2 py-0.5 rounded uppercase mb-2 inline-block">Featured</span>
-                            <h3 class="text-white font-serif text-lg mb-1">Luxury Styles</h3>
-                            <p class="text-gray-400 text-xs mb-3">Tren desain 2024</p>
-                            <a href="{{ route('portfolio.all') }}" class="text-primary text-xs font-bold uppercase hover:text-white transition-colors flex items-center gap-1">
-                                Lihat Portfolio <span class="material-symbols-outlined text-sm">arrow_forward</span>
-                            </a>
+                        <div class="relative overflow-hidden rounded-xl border border-white/5 group/card">
+                            <img src="{{ asset('assets/images/materials/wood.jpg') }}" class="absolute inset-0 w-full h-full object-cover opacity-30 transition-transform duration-700 group-hover/card:scale-110" onerror="this.style.display='none'">
+                            <div class="absolute inset-0 bg-linear-to-t from-black via-black/50 to-transparent"></div>
+                            <div class="relative p-5 h-full flex flex-col justify-end">
+                                <span class="bg-primary text-black text-[9px] font-bold px-2 py-1 rounded w-fit uppercase mb-2">Featured</span>
+                                <h3 class="text-white font-serif text-lg mb-1 italic">Luxury Wood</h3>
+                                <a href="{{ route('portfolio.all') }}" class="text-white text-xs font-bold uppercase hover:text-primary transition-colors flex items-center gap-2 mt-2">
+                                    Explore <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
             {{-- Portfolio Dropdown --}}
-            <div class="relative group h-20 flex items-center px-1">
-                <a href="{{ route('portfolio.all') }}" class="flex items-center gap-1 px-4 py-2 text-gray-300 hover:text-white font-medium transition-colors">
-                    Portfolio <span class="material-symbols-outlined text-[18px] opacity-70">expand_more</span>
+            <div class="relative group h-20 flex items-center px-2">
+                <a href="{{ route('portfolio.all') }}" class="group/link relative flex items-center gap-1 px-2 py-2 text-gray-300 hover:text-white font-medium transition-colors">
+                    <span>Portfolio</span>
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover/link:w-full"></span>
+                    <span class="material-symbols-outlined text-[18px] opacity-70 group-hover/link:rotate-180 transition-transform duration-300">expand_more</span>
                 </a>
-                <div class="god-dropdown absolute top-[70px] left-1/2 -translate-x-1/2 w-[240px] bg-[#111] border border-white/10 rounded-xl p-2 shadow-2xl">
-                    <a href="{{ route('portfolio.all') }}" class="block p-3 rounded-lg hover:bg-white/5 text-gray-300 hover:text-white text-sm transition-colors">Semua Proyek</a>
-                    <a href="{{ route('home') }}#portfolio" class="block p-3 rounded-lg hover:bg-white/5 text-gray-300 hover:text-white text-sm transition-colors">Living Room</a>
-                    <a href="{{ route('home') }}#portfolio" class="block p-3 rounded-lg hover:bg-white/5 text-gray-300 hover:text-white text-sm transition-colors">Kitchen Set</a>
+                <div class="god-dropdown absolute top-[70px] left-1/2 -translate-x-1/2 w-[240px] bg-[#0A0C10] border border-white/5 rounded-xl p-2 shadow-2xl backdrop-blur-xl">
+                    <a href="{{ route('portfolio.all') }}" class="block p-3 rounded-lg hover:bg-white/5 text-gray-400 hover:text-white text-sm transition-all hover:pl-4">Semua Proyek</a>
+                    <a href="{{ route('home') }}#portfolio" class="block p-3 rounded-lg hover:bg-white/5 text-gray-400 hover:text-white text-sm transition-all hover:pl-4">Living Room</a>
+                    <a href="{{ route('home') }}#portfolio" class="block p-3 rounded-lg hover:bg-white/5 text-gray-400 hover:text-white text-sm transition-all hover:pl-4">Kitchen Set</a>
                 </div>
             </div>
 
-            <a href="{{ route('home') }}#calculator" class="px-4 py-2 text-gray-300 hover:text-white font-medium transition-colors">Kalkulator</a>
-            <a href="{{ route('home') }}#testimonials" class="px-4 py-2 text-gray-300 hover:text-white font-medium transition-colors">Testimoni</a>
+            <a href="{{ route('home') }}#calculator" class="group/link relative px-2 py-2 text-gray-300 hover:text-white font-medium transition-colors">
+                <span>Kalkulator</span>
+                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover/link:w-full"></span>
+            </a>
+            <a href="{{ route('home') }}#testimonials" class="group/link relative px-2 py-2 text-gray-300 hover:text-white font-medium transition-colors">
+                <span>Testimoni</span>
+                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover/link:w-full"></span>
+            </a>
         </div>
 
         {{-- CTA & Toggle --}}
-        <div class="flex items-center gap-4 relative z-[100000]">
+        <div class="flex items-center gap-4 relative z-100000">
             <a href="{{ route('home') }}#contact" class="hidden lg:flex px-6 py-2.5 bg-white text-black rounded-full font-bold text-sm hover:bg-primary transition-colors shadow-lg shadow-white/10">
                 Konsultasi
             </a>
@@ -168,7 +179,7 @@
 </nav>
 
 {{-- MOBILE DRAWER --}}
-<div id="mobile-drawer" class="fixed inset-0 z-[99990] bg-[#050505] pt-24 px-6 flex flex-col overflow-y-auto">
+<div id="mobile-drawer" class="fixed inset-0 z-99990 bg-[#050505] pt-24 px-6 flex flex-col overflow-y-auto">
     {{-- Decorative BG --}}
     <div class="absolute top-0 right-0 w-[80%] h-[50%] bg-primary/5 blur-[80px] rounded-full pointer-events-none"></div>
 

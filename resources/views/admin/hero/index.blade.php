@@ -30,7 +30,7 @@
         <div class="relative h-64 bg-cover bg-center"
             style="background-image: url('{{ $hero->background_url }}');">
             <div class="absolute inset-0 bg-linear-to-r from-black/90 via-black/50 to-transparent"></div>
-            <div class="absolute inset-0 bg-linear-to-t from-[#0a0c10] via-transparent to-black/40"></div>
+            <div class="absolute inset-0 bg-linear-to-t from-background-dark via-transparent to-black/40"></div>
             <div class="relative z-10 p-8 flex flex-col justify-center h-full max-w-xl">
                 <span class="text-primary text-xs font-bold uppercase tracking-widest mb-4">#1 Jasa Interior Design</span>
                 <h2 class="text-2xl md:text-3xl font-bold text-white mb-3">

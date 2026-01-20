@@ -6,7 +6,7 @@
     <div class="h-24 flex items-center px-8 border-b border-white/5 relative overflow-hidden group">
         <div class="absolute inset-0 bg-primary/5 translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
         <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-3 relative z-10">
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-yellow-600 flex items-center justify-center shadow-lg shadow-primary/20">
+            <div class="w-10 h-10 rounded-xl bg-linear-to-br from-primary to-yellow-600 flex items-center justify-center shadow-lg shadow-primary/20">
                 <span class="material-symbols-outlined text-white text-xl">grid_view</span>
             </div>
             <div>
@@ -28,6 +28,7 @@
         <x-admin-nav-link route="admin.portfolio.index" icon="photo_library" label="Portfolio" active="admin.portfolio.*" />
         <x-admin-nav-link route="admin.services.index" icon="design_services" label="Layanan" active="admin.services.*" />
         <x-admin-nav-link route="admin.testimonials.index" icon="rate_review" label="Testimoni" active="admin.testimonials.*" />
+        <x-admin-nav-link route="admin.statistics.index" icon="analytics" label="Statistik" active="admin.statistics.*" />
         <x-admin-nav-link route="admin.messages.index" icon="mail" label="Inbox Pesan" active="admin.messages.*" />
         <x-admin-nav-link route="#" icon="calculate" label="Kalkulator" />
 
@@ -51,7 +52,7 @@
     {{-- User Profile Snippet --}}
     <div class="p-4 border-t border-white/5 bg-black/20">
         <div class="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/5 hover:border-primary/30 transition-colors group cursor-pointer">
-            <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-gray-700 to-gray-600 flex items-center justify-center text-white font-bold text-sm border-2 border-[#0B0D11] shadow-lg">
+            <div class="w-10 h-10 rounded-full bg-linear-to-tr from-gray-700 to-gray-600 flex items-center justify-center text-white font-bold text-sm border-2 border-[#0B0D11] shadow-lg">
                 AD
             </div>
             <div class="flex-1 min-w-0">

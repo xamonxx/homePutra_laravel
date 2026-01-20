@@ -43,18 +43,18 @@
             $imageSrc = $portfolio->image_url ?: $fallbackImages[$index % count($fallbackImages)];
             $delay = ($index % 3) * 100; // Stagger animation
             @endphp
-            <div class="group relative overflow-hidden rounded-xl break-inside-avoid cursor-pointer card-hover" data-aos="fade-up" data-aos-delay="{{ $delay }}">
+            <a href="{{ route('portfolio.show', $portfolio->id) }}" class="group relative overflow-hidden rounded-xl break-inside-avoid cursor-pointer card-hover" data-aos="fade-up" data-aos-delay="{{ $delay }}">
                 <!-- Image -->
-                <div class="aspect-[4/5] overflow-hidden">
+                <div class="aspect-4/5 overflow-hidden">
                     <img alt="{{ $portfolio->title }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="{{ $imageSrc }}" loading="lazy" />
                 </div>
 
                 <!-- Overlay -->
-                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+                <div class="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
                     <span class="text-primary text-[10px] uppercase tracking-[0.2em] font-bold mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-100">{{ $portfolio->category ?: 'Interior' }}</span>
                     <h3 class="text-2xl text-white font-serif italic translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-200">{{ $portfolio->title }}</h3>
                 </div>
-            </div>
+            </a>
             @empty
             <div class="col-span-full text-center py-20">
                 <p class="text-gray-500 italic">Belum ada portfolio ditampilkan.</p>
