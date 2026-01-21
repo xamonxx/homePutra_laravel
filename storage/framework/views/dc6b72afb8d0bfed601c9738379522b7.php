@@ -7,8 +7,8 @@
 <section class="pt-32 pb-12 relative overflow-hidden">
     <!-- Background -->
     <div class="absolute inset-0 pointer-events-none">
-        <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/10 to-transparent"></div>
-        <div class="absolute bottom-0 left-0 w-1/3 h-1/2 bg-gradient-to-tr from-primary/5 to-transparent"></div>
+        <div class="absolute top-0 right-0 w-1/2 h-full bg-linear-to-l from-primary/10 to-transparent"></div>
+        <div class="absolute bottom-0 left-0 w-1/3 h-1/2 bg-linear-to-tr from-primary/5 to-transparent"></div>
         <div class="absolute top-20 left-1/4 w-72 h-72 bg-primary/5 rounded-full blur-[100px]"></div>
     </div>
 
@@ -45,14 +45,14 @@
 </section>
 
 <!-- Budget Calculator Full Section -->
-<section class="py-8 sm:py-12 lg:pb-16 bg-[#0a0c10] relative overflow-hidden" id="calculator-form">
+<section class="py-8 sm:py-12 lg:pb-16 bg-background-dark relative overflow-hidden" id="calculator-form">
     <div class="max-w-[1200px] mx-auto px-4 sm:px-6 relative z-10">
         <!-- Calculator Container -->
         <div class="grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-8">
 
             <!-- Calculator Form - Left Side -->
             <div class="lg:col-span-3">
-                <div class="bg-gradient-to-br from-[#1a1d26] to-[#14171f] border border-white/10 rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 shadow-2xl relative overflow-hidden">
+                <div class="bg-linear-to-br from-[#1a1d26] to-[#14171f] border border-white/10 rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 shadow-2xl relative overflow-hidden">
                     <!-- Glow Effect -->
                     <div class="absolute top-0 right-0 w-1/2 h-1/2 bg-primary/5 blur-[80px] pointer-events-none"></div>
 
@@ -96,7 +96,7 @@
                             <label class="block text-xs uppercase tracking-widest font-bold text-gray-300 mb-4">Nama Lengkap</label>
                             <div class="relative">
                                 <input type="text" id="customer-name" name="customer_name"
-                                    class="w-full bg-[#0a0c10] border-2 border-white/10 rounded-xl text-white p-4 pl-12 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all"
+                                    class="w-full bg-background-dark border-2 border-white/10 rounded-xl text-white p-4 pl-12 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all"
                                     placeholder="Masukkan nama Anda...">
                                 <div class="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none">
                                     <span class="material-symbols-outlined text-gray-400">person</span>
@@ -124,7 +124,7 @@
                                 </label>
                                 <label class="location-option cursor-pointer group">
                                     <input type="radio" name="location" value="luar_kota" class="hidden">
-                                    <div class="border-2 border-white/10 rounded-xl p-5 transition-all group-hover:border-primary/50 group-hover:bg-white/[0.02]">
+                                    <div class="border-2 border-white/10 rounded-xl p-5 transition-all group-hover:border-primary/50 group-hover:bg-white/2">
                                         <div class="flex items-center gap-4">
                                             <div class="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center">
                                                 <span class="material-symbols-outlined text-gray-400 text-2xl">local_shipping</span>
@@ -145,7 +145,7 @@
                             <div class="relative" id="jabar-dropdown-container">
                                 <!-- Searchable Input -->
                                 <input type="text" id="kota-kabupaten-search" name="kota_kabupaten_search"
-                                    class="w-full bg-[#0a0c10] border-2 border-white/10 rounded-xl text-white p-4 pl-12 pr-12 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all"
+                                    class="w-full bg-background-dark border-2 border-white/10 rounded-xl text-white p-4 pl-12 pr-12 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all"
                                     placeholder="Ketik untuk mencari kabupaten/kota..." autocomplete="off">
 
                                 <div class="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none">
@@ -214,7 +214,7 @@
                                 <label class="block text-gray-400 text-xs mb-2">Provinsi</label>
                                 <div class="relative">
                                     <input type="text" id="provinsi-input" name="provinsi"
-                                        class="w-full bg-[#0a0c10] border-2 border-white/10 rounded-xl text-white p-4 pl-12 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all"
+                                        class="w-full bg-background-dark border-2 border-white/10 rounded-xl text-white p-4 pl-12 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all"
                                         placeholder="Contoh: Jawa Tengah, DKI Jakarta...">
                                     <div class="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none">
                                         <span class="material-symbols-outlined text-gray-400">map</span>
@@ -227,7 +227,7 @@
                                 <label class="block text-gray-400 text-xs mb-2">Kota / Kabupaten</label>
                                 <div class="relative">
                                     <input type="text" id="kota-input" name="kota"
-                                        class="w-full bg-[#0a0c10] border-2 border-white/10 rounded-xl text-white p-4 pl-12 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all"
+                                        class="w-full bg-background-dark border-2 border-white/10 rounded-xl text-white p-4 pl-12 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all"
                                         placeholder="Contoh: Kota Semarang, Kabupaten Klaten...">
                                     <div class="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none">
                                         <span class="material-symbols-outlined text-gray-400">location_city</span>
@@ -253,12 +253,12 @@
                         </div>
 
                         <!-- Product Preview Card -->
-                        <div id="product-preview" class="mt-8 bg-gradient-to-br from-white/[0.08] to-white/[0.02] border border-white/10 rounded-2xl overflow-hidden">
+                        <div id="product-preview" class="mt-8 bg-linear-to-br from-white/8 to-white/2 border border-white/10 rounded-2xl overflow-hidden">
                             <div class="grid sm:grid-cols-2 gap-0">
                                 <!-- Product Image -->
-                                <div class="relative aspect-[4/3] sm:aspect-auto overflow-hidden">
+                                <div class="relative aspect-4/3 sm:aspect-auto overflow-hidden">
                                     <img id="preview-image" src="<?php echo e(asset('assets/images/products/kitchen-set.png')); ?>" alt="Product Preview" class="w-full h-full object-cover transition-all duration-500">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                                    <div class="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent"></div>
                                     <div class="absolute bottom-4 left-4 right-4">
                                         <span id="preview-badge" class="inline-block px-4 py-2 bg-primary text-black text-xs font-bold uppercase tracking-wider rounded-full shadow-lg">Best Value</span>
                                     </div>
@@ -310,7 +310,7 @@
                         </div>
 
                         <!-- Live Price Preview -->
-                        <div id="price-preview" class="mt-8 bg-gradient-to-br from-primary/20 via-primary/10 to-transparent border border-primary/30 rounded-2xl p-6 relative overflow-hidden">
+                        <div id="price-preview" class="mt-8 bg-linear-to-br from-primary/20 via-primary/10 to-transparent border border-primary/30 rounded-2xl p-6 relative overflow-hidden">
                             <!-- Decorative glow -->
                             <div class="absolute -top-8 -left-8 w-24 h-24 bg-primary/20 rounded-full blur-2xl"></div>
 
@@ -320,7 +320,7 @@
                                         <span class="material-symbols-outlined text-sm">payments</span>
                                         Harga Per Meter
                                     </div>
-                                    <div id="live-price" class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-primary to-white tracking-tight">Rp 0</div>
+                                    <div id="live-price" class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-transparent bg-clip-text bg-linear-to-r from-white via-primary to-white tracking-tight">Rp 0</div>
                                 </div>
                                 <div class="sm:text-right">
                                     <div class="text-gray-500 text-[10px] uppercase tracking-[0.15em] sm:tracking-[0.2em] font-bold mb-2 sm:mb-3 flex items-center sm:justify-end gap-2">
@@ -358,7 +358,7 @@
                             <label class="block text-xs uppercase tracking-widest font-bold text-gray-300 mb-4">Panjang (Meter Lari)</label>
                             <div class="relative">
                                 <input type="number" id="length-input" min="0.5" max="50" step="0.5" value="3"
-                                    class="w-full bg-[#0a0c10] border-2 border-white/10 rounded-xl text-white text-3xl font-bold p-5 pr-20 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all"
+                                    class="w-full bg-background-dark border-2 border-white/10 rounded-xl text-white text-3xl font-bold p-5 pr-20 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all"
                                     placeholder="3.0">
                                 <span class="absolute right-5 top-1/2 -translate-y-1/2 text-gray-400 font-medium text-lg">meter</span>
                             </div>
@@ -370,12 +370,29 @@
                             </div>
                         </div>
 
+                        <!-- Height Input (Hidden by default, shown for Box Elektronik) -->
+                        <div id="height-input-container" class="mb-8 hidden">
+                            <label class="block text-xs uppercase tracking-widest font-bold text-gray-300 mb-4">Tinggi (Meter)</label>
+                            <div class="relative">
+                                <input type="number" id="height-input" min="0.1" max="5" step="0.1" value="2"
+                                    class="w-full bg-background-dark border-2 border-white/10 rounded-xl text-white text-3xl font-bold p-5 pr-20 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all"
+                                    placeholder="2.0">
+                                <span class="absolute right-5 top-1/2 -translate-y-1/2 text-gray-400 font-medium text-lg">meter</span>
+                            </div>
+                            <div class="flex items-center gap-3 mt-4">
+                                <button type="button" onclick="adjustHeight(-0.1)" class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 text-white text-xl font-bold hover:bg-primary hover:text-black hover:border-primary transition-all">−</button>
+                                <input type="range" id="height-slider" min="0.1" max="5" step="0.1" value="2"
+                                    class="flex-1 h-3 bg-gray-700 rounded-full appearance-none cursor-pointer accent-primary">
+                                <button type="button" onclick="adjustHeight(0.1)" class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 text-white text-xl font-bold hover:bg-primary hover:text-black hover:border-primary transition-all">+</button>
+                            </div>
+                        </div>
+
                         <!-- Additional Costs -->
                         <div class="mb-6">
                             <label class="block text-xs uppercase tracking-widest font-bold text-gray-300 mb-4">Biaya Tambahan (Opsional)</label>
                             <div class="space-y-3" id="additional-costs">
                                 <!-- Include Shipping -->
-                                <label class="flex items-center gap-4 p-5 bg-white/[0.03] border border-white/10 rounded-xl cursor-pointer hover:border-primary/50 transition-all group">
+                                <label class="flex items-center gap-4 p-5 bg-white/3 border border-white/10 rounded-xl cursor-pointer hover:border-primary/50 transition-all group">
                                     <input type="checkbox" id="include-shipping" checked class="w-6 h-6 rounded-lg border-2 border-gray-600 text-primary focus:ring-primary focus:ring-offset-0 bg-transparent">
                                     <div class="flex-1">
                                         <span class="text-white font-semibold block">Termasuk Ongkir</span>
@@ -384,6 +401,7 @@
                                     <span class="material-symbols-outlined text-primary text-2xl group-hover:scale-110 transition-transform">local_shipping</span>
                                 </label>
                                 <!-- More costs loaded dynamically -->
+                                <div id="dynamic-additional-costs" class="space-y-3"></div>
                             </div>
                         </div>
                     </div>
@@ -412,7 +430,7 @@
 
             <!-- Result Panel - Right Side -->
             <div class="lg:col-span-2">
-                <div class="bg-gradient-to-br from-[#1a1d26] to-[#14171f] border border-white/10 rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 shadow-2xl lg:sticky lg:top-24 overflow-hidden">
+                <div class="bg-linear-to-br from-[#1a1d26] to-[#14171f] border border-white/10 rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 shadow-2xl lg:sticky lg:top-24 overflow-hidden">
                     <!-- Glow -->
                     <div class="absolute bottom-0 right-0 w-1/2 h-1/2 bg-primary/5 blur-[60px] pointer-events-none"></div>
 
@@ -484,14 +502,14 @@
                         </div>
 
                         <!-- Grand Total -->
-                        <div class="bg-gradient-to-br from-primary/30 via-primary/15 to-transparent rounded-xl sm:rounded-2xl p-4 sm:p-6 mb-4 sm:mb-6 border border-primary/20 relative overflow-hidden">
+                        <div class="bg-linear-to-br from-primary/30 via-primary/15 to-transparent rounded-xl sm:rounded-2xl p-4 sm:p-6 mb-4 sm:mb-6 border border-primary/20 relative overflow-hidden">
                             <!-- Decorative glow -->
                             <div class="absolute -top-10 -right-10 w-24 sm:w-32 h-24 sm:h-32 bg-primary/20 rounded-full blur-3xl"></div>
 
                             <div class="text-center relative z-10">
                                 <span class="text-primary/80 text-[9px] sm:text-[10px] uppercase tracking-[0.2em] sm:tracking-[0.25em] font-bold block mb-3 sm:mb-4">💰 Estimasi Total</span>
                                 <div class="mb-2">
-                                    <span id="summary-total-range" class="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-primary to-white tracking-tight leading-tight">Rp 0</span>
+                                    <span id="summary-total-range" class="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-transparent bg-clip-text bg-linear-to-r from-white via-primary to-white tracking-tight leading-tight">Rp 0</span>
                                 </div>
                                 <div class="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-white/5 rounded-full mt-2 sm:mt-3">
                                     <span class="material-symbols-outlined text-yellow-400 text-xs sm:text-sm">info</span>
@@ -501,7 +519,7 @@
                         </div>
 
                         <!-- Summary Text -->
-                        <div class="bg-white/[0.03] rounded-lg sm:rounded-xl p-3 sm:p-5 mb-4 sm:mb-6 border border-white/5">
+                        <div class="bg-white/3 rounded-lg sm:rounded-xl p-3 sm:p-5 mb-4 sm:mb-6 border border-white/5">
                             <p id="summary-text" class="text-gray-300 text-xs sm:text-sm leading-relaxed">-</p>
                         </div>
 
@@ -529,22 +547,22 @@
 <section class="py-16 bg-[#0f1218] border-t border-white/5">
     <div class="max-w-[1200px] mx-auto px-6">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="text-center p-6 bg-white/[0.02] rounded-xl border border-white/5" data-aos="fade-up">
-                <div class="w-16 h-16 mx-auto bg-gradient-to-br from-primary/20 to-primary/5 rounded-2xl flex items-center justify-center mb-4">
+            <div class="text-center p-6 bg-white/2 rounded-xl border border-white/5" data-aos="fade-up">
+                <div class="w-16 h-16 mx-auto bg-linear-to-br from-primary/20 to-primary/5 rounded-2xl flex items-center justify-center mb-4">
                     <span class="material-symbols-outlined text-primary text-3xl">workspace_premium</span>
                 </div>
                 <h3 class="text-white font-medium mb-2">Garansi 2 Tahun</h3>
                 <p class="text-gray-500 text-sm">Jaminan kualitas untuk setiap proyek yang kami kerjakan</p>
             </div>
-            <div class="text-center p-6 bg-white/[0.02] rounded-xl border border-white/5" data-aos="fade-up" data-aos-delay="100">
-                <div class="w-16 h-16 mx-auto bg-gradient-to-br from-primary/20 to-primary/5 rounded-2xl flex items-center justify-center mb-4">
+            <div class="text-center p-6 bg-white/2 rounded-xl border border-white/5" data-aos="fade-up" data-aos-delay="100">
+                <div class="w-16 h-16 mx-auto bg-linear-to-br from-primary/20 to-primary/5 rounded-2xl flex items-center justify-center mb-4">
                     <span class="material-symbols-outlined text-primary text-3xl">handyman</span>
                 </div>
                 <h3 class="text-white font-medium mb-2">Tukang Profesional</h3>
                 <p class="text-gray-500 text-sm">Tim ahli berpengalaman dengan standar kerja tinggi</p>
             </div>
-            <div class="text-center p-6 bg-white/[0.02] rounded-xl border border-white/5" data-aos="fade-up" data-aos-delay="200">
-                <div class="w-16 h-16 mx-auto bg-gradient-to-br from-primary/20 to-primary/5 rounded-2xl flex items-center justify-center mb-4">
+            <div class="text-center p-6 bg-white/2 rounded-xl border border-white/5" data-aos="fade-up" data-aos-delay="200">
+                <div class="w-16 h-16 mx-auto bg-linear-to-br from-primary/20 to-primary/5 rounded-2xl flex items-center justify-center mb-4">
                     <span class="material-symbols-outlined text-primary text-3xl">local_shipping</span>
                 </div>
                 <h3 class="text-white font-medium mb-2">Pengiriman Aman</h3>

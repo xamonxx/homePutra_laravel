@@ -12,6 +12,7 @@ const calcState = {
     material: null,
     model: null,
     length: 3,
+    height: 2,
     includeShipping: true,
     additionalCosts: [],
     data: {
@@ -132,6 +133,11 @@ const productData = {
         slug: 'wallpanel',
         image: `${HP_SITE_URL}/assets/images/products/wallpanel.png`,
         minPrice: 850000
+    },
+    5: {
+        slug: 'box-elektronik-dapur',
+        image: `${HP_SITE_URL}/assets/images/products/box-elektronik.png`,
+        minPrice: 2100000
     }
 };
 
@@ -316,12 +322,13 @@ function renderModels() {
  * Menampilkan Biaya Tambahan
  */
 function renderAdditionalCosts() {
-    const container = document.getElementById('additional-costs');
+    // Target the specific container for dynamic costs to avoid affecting static ones (like shipping)
+    const container = document.getElementById('dynamic-additional-costs');
     if (!container) return;
 
     // Check if additionalCosts exists and is an array
     if (!calcState.data.additionalCosts || !Array.isArray(calcState.data.additionalCosts)) {
-        console.log('No additional costs data available');
+        container.innerHTML = ''; // Clear if empty
         return;
     }
 
@@ -336,7 +343,7 @@ function renderAdditionalCosts() {
         </label>
     `).join('');
 
-    container.innerHTML += html;
+    container.innerHTML = html; // Replace content instead of appending
 }
 
 /**
@@ -489,6 +496,36 @@ function adjustLength(delta) {
     if (lengthSlider) lengthSlider.value = Math.min(newVal, 20);
 }
 
+// Penanganan Tinggi (Box Elektronik)
+const heightInput = document.getElementById('height-input');
+const heightSlider = document.getElementById('height-slider');
+
+if (heightInput) {
+    heightInput.addEventListener('input', function () {
+        let val = parseFloat(this.value) || 0;
+        if (val > 5) val = 5;
+        if (val < 0.1) val = 0.1;
+        calcState.height = val;
+        if (heightSlider) heightSlider.value = val;
+    });
+}
+
+if (heightSlider) {
+    heightSlider.addEventListener('input', function () {
+        calcState.height = parseFloat(this.value);
+        if (heightInput) heightInput.value = this.value;
+    });
+}
+
+function adjustHeight(delta) {
+    let newVal = parseFloat((calcState.height + delta).toFixed(1));
+    if (newVal < 0.1) newVal = 0.1;
+    if (newVal > 5) newVal = 5;
+    calcState.height = newVal;
+    if (heightInput) heightInput.value = newVal;
+    if (heightSlider) heightSlider.value = newVal;
+}
+
 /**
  * Navigasi Step Kalkulator
  */
@@ -522,6 +559,16 @@ function showStep(step) {
     document.querySelectorAll('.step-content').forEach(el => el.classList.add('hidden'));
     const stepEl = document.getElementById(`step${step}`);
     if (stepEl) stepEl.classList.remove('hidden');
+
+    // Handle Height Input Visibility (Only in Step 3 and if product is Box Elektronik)
+    if (step === 3) {
+        const heightContainer = document.getElementById('height-input-container');
+        if (calcState.product === 5) {
+            if (heightContainer) heightContainer.classList.remove('hidden');
+        } else {
+            if (heightContainer) heightContainer.classList.add('hidden');
+        }
+    }
 
     const btnPrev = document.getElementById('btn-prev');
     const btnNext = document.getElementById('btn-next');
@@ -650,7 +697,9 @@ function resetCalculator() {
     calcState.product = calcState.data.products.length > 0 ? calcState.data.products[0].id : null;
     calcState.material = null;
     calcState.model = calcState.data.models.length > 0 ? calcState.data.models[0].id : null;
+    calcState.model = calcState.data.models.length > 0 ? calcState.data.models[0].id : null;
     calcState.length = 3;
+    calcState.height = 2;
     calcState.includeShipping = true;
     calcState.additionalCosts = [];
     calcState.result = null;
@@ -673,6 +722,15 @@ function resetCalculator() {
 
     const lengthSlider = document.getElementById('length-slider');
     if (lengthSlider) lengthSlider.value = '3';
+
+    const heightInput = document.getElementById('height-input');
+    if (heightInput) heightInput.value = '2';
+
+    const heightSlider = document.getElementById('height-slider');
+    if (heightSlider) heightSlider.value = '2';
+
+    const heightContainer = document.getElementById('height-input-container');
+    if (heightContainer) heightContainer.classList.add('hidden');
 
     // Reset checkboxes
     document.querySelectorAll('input[name="additional_cost"]').forEach(cb => cb.checked = false);
@@ -732,7 +790,14 @@ function displayResult(data) {
     if (summaryProduct) summaryProduct.textContent = data.product || '-';
     if (summaryMaterial) summaryMaterial.textContent = data.material || '-';
     if (summaryModel) summaryModel.textContent = data.model || '-';
-    if (summaryLength) summaryLength.textContent = `${data.length} meter`;
+    if (summaryModel) summaryModel.textContent = data.model || '-';
+    if (summaryLength) {
+        if (data.product === 'Box Elektronik Dapur' && data.height) {
+            summaryLength.textContent = `${data.length}m x ${data.height}m`;
+        } else {
+            summaryLength.textContent = `${data.length} meter`;
+        }
+    }
     if (summaryPricePerMeter) summaryPricePerMeter.textContent = formatCurrency(data.price_per_meter);
     if (summarySubtotal) summarySubtotal.textContent = formatCurrency(data.subtotal);
     if (summaryShipping) summaryShipping.textContent = data.shipping_label || 'Gratis';
@@ -798,35 +863,42 @@ function calculateEstimate() {
     fetch(`${HP_SITE_URL}/api/calculator/calculate`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
             },
             body: JSON.stringify({
                 product_id: calcState.product,
                 material_id: calcState.material,
                 model_id: calcState.model,
-                location_type: calcState.location,
                 length: calcState.length,
-                include_shipping: calcState.includeShipping,
-                additional_costs: calcState.additionalCosts,
-                alamat: alamat,
-                nama: nameInput ? nameInput.value.trim() : 'Pelanggan'
+                height: calcState.height,
+                location_type: calcState.location,
+                additional_costs: calcState.additionalCosts
             })
         })
-        .then(response => response.json())
+        .then(res => res.json())
         .then(result => {
             if (result.success) {
                 calcState.result = result.data;
+                // Add height to result data manually if backend doesn't return it for rendering purpose
+                if (calcState.product === 5) {
+                    calcState.result.height = calcState.height;
+                }
                 displayResult(result.data);
                 showToastNotification('Estimasi berhasil dihitung!', 'success');
             } else {
-                showToastNotification(result.error || 'Gagal menghitung estimasi');
+                showToastNotification(result.error || 'Terjadi kesalahan saat menghitung', 'error');
             }
         })
         .catch(error => {
-            console.error('Kesalahan kalkulasi:', error);
-            showToastNotification('Terjadi kesalahan. Silakan coba lagi.');
+            console.error('Error:', error);
+            showToastNotification('Gagal menghubungkan ke server', 'error');
+        })
+        .finally(() => {
+            // Reset loading state if implemented
         });
 }
+
 
 function sendToWhatsApp() {
     if (!calcState.result) {

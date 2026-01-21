@@ -13,6 +13,7 @@ class CalculatorController extends Controller
         ['id' => 2, 'slug' => 'wardrobe', 'name' => 'Lemari & Wardrobe', 'icon' => 'door_sliding', 'min_price' => 2300000],
         ['id' => 3, 'slug' => 'backdrop-tv', 'name' => 'Backdrop TV', 'icon' => 'tv', 'min_price' => 2100000],
         ['id' => 4, 'slug' => 'wallpanel', 'name' => 'Wallpanel', 'icon' => 'dashboard', 'min_price' => 850000],
+        ['id' => 5, 'slug' => 'box-elektronik-dapur', 'name' => 'Box Elektronik Dapur', 'icon' => 'kitchen', 'min_price' => 2100000],
     ];
 
     private $materials = [
@@ -29,6 +30,9 @@ class CalculatorController extends Controller
 
         ['id' => 9, 'product_id' => 4, 'name' => 'WPC Wood Panel', 'grade' => 'A', 'is_waterproof' => 1, 'is_termite_resistant' => 1, 'base_price' => 850000],
         ['id' => 10, 'product_id' => 4, 'name' => 'PVC Marble Sheet', 'grade' => 'B', 'is_waterproof' => 1, 'is_termite_resistant' => 1, 'base_price' => 650000],
+
+        ['id' => 11, 'product_id' => 5, 'name' => 'Blockboard (BB)', 'grade' => 'B', 'is_waterproof' => 0, 'is_termite_resistant' => 0, 'base_price' => 2100000],
+        ['id' => 12, 'product_id' => 5, 'name' => 'Multipleks (MP)', 'grade' => 'A', 'is_waterproof' => 0, 'is_termite_resistant' => 0, 'base_price' => 2100000],
     ];
 
     private $models = [
@@ -111,6 +115,7 @@ class CalculatorController extends Controller
             'material_id' => 'required',
             'model_id' => 'required',
             'length' => 'required|numeric',
+            'height' => 'nullable|numeric',
             'location_type' => 'required',
             'additional_costs' => 'array'
         ]);
@@ -119,6 +124,7 @@ class CalculatorController extends Controller
         $materialId = $data['material_id'];
         $modelId = $data['model_id'];
         $length = $data['length'];
+        $height = $data['height'] ?? 0;
 
         $material = collect($this->materials)->firstWhere('id', $materialId);
         $model = collect($this->models)->firstWhere('id', $modelId);
@@ -134,7 +140,22 @@ class CalculatorController extends Controller
             $pricePerMeter *= 1.1;
         }
 
-        $subtotal = $pricePerMeter * $length;
+        // Special calculation for Box Elektronik Dapur (ID 5)
+        if ($productId == 5) {
+            // Logic: L x H (if L < 1, count as Height only, implying L=1 effectively for min pricing, or specifically user said "tingginya aja")
+            // Assuming "tingginya aja" means Area = 1 * Height.
+            // If L >= 1, Area = L * Height.
+            $effectiveLength = ($length < 1) ? 1 : $length;
+
+            // If height is not provided (should be required in frontend), default to 1 to avoid zero
+            $effectiveHeight = $height > 0 ? $height : 1;
+
+            $area = $effectiveLength * $effectiveHeight;
+            $subtotal = $pricePerMeter * $area;
+        } else {
+            // Standard linear meter calculation
+            $subtotal = $pricePerMeter * $length;
+        }
 
         // Additional costs
         $addCostTotal = 0;

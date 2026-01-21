@@ -60,8 +60,8 @@ public_html/
 1. **hPanel** → **Databases** → **MySQL Databases**
 2. Buat database baru
 3. **CATAT** kredensial:
-   - Database name: `u123456789_homeputra`
-   - Username: `u123456789_admin`
+   - Database name: `u603012205_homeputra_dbs`
+   - Username: `u603012205_homeputra_usn`
    - Password: `xxxx`
 
 ---
