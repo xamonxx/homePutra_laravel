@@ -31,16 +31,17 @@ return Application::configure(basePath: dirname(__DIR__))
 
             $useSubdomain = env('ADMIN_SUBDOMAIN', false);
             $adminDomain = env('ADMIN_DOMAIN', 'admin.' . env('APP_DOMAIN', 'homeputrainterior.com'));
+            $currentHost = $_SERVER['HTTP_HOST'] ?? '';
 
-            if ($useSubdomain) {
+            // Jika host adalah admin subdomain (atau ENV diset true), registrasikan route di domain tersebut
+            if ($useSubdomain || str_starts_with($currentHost, 'admin.')) {
                 // MODE 1: Subdomain-based routing (Production)
-                // URL: admin.homeputrainterior.com
                 Route::middleware('web')
                     ->domain($adminDomain)
                     ->group(base_path('routes/admin.php'));
             } else {
-                // MODE 2: Path-based routing (Local Development)
-                // URL: homeputra-laravel.test/admin
+                // MODE 2: Path-based routing (Local/Fallback)
+                // Hanya aktif jika bukan di subdomain admin
                 Route::middleware('web')
                     ->prefix('admin')
                     ->group(base_path('routes/admin.php'));
