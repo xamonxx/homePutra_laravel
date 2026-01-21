@@ -4,7 +4,6 @@
     </IfModule>
 
     RewriteEngine On
-    RewriteBase /
 
     # Force HTTPS
     RewriteCond %{HTTPS} off
@@ -25,54 +24,30 @@
     RewriteRule ^ index.php [L]
 </IfModule>
 
-# =========================================
-# SECURITY HEADERS
-# =========================================
+# Security
 <IfModule mod_headers.c>
     Header always set X-Content-Type-Options "nosniff"
     Header always set X-Frame-Options "SAMEORIGIN"
     Header always set X-XSS-Protection "1; mode=block"
-    Header always set Referrer-Policy "strict-origin-when-cross-origin"
 </IfModule>
 
-# =========================================
-# PROTECT SENSITIVE FILES
-# =========================================
-<Files .env>
+# Block sensitive files
+<FilesMatch "^\.">
     Order allow,deny
-    Deny from all
-</Files>
-
-<FilesMatch "\.(htaccess|htpasswd|ini|log|sh|sql|bak|config|yml|yaml|lock)$">
-    Order Allow,Deny
     Deny from all
 </FilesMatch>
 
-# =========================================
-# COMPRESSION
-# =========================================
+# Compression
 <IfModule mod_deflate.c>
-    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/javascript application/json
 </IfModule>
 
-# =========================================
-# CACHING
-# =========================================
+# Cache static files
 <IfModule mod_expires.c>
     ExpiresActive On
-    
-    # Images
     ExpiresByType image/jpeg "access plus 1 year"
     ExpiresByType image/png "access plus 1 year"
-    ExpiresByType image/gif "access plus 1 year"
     ExpiresByType image/webp "access plus 1 year"
-    ExpiresByType image/svg+xml "access plus 1 year"
-    
-    # CSS & JavaScript
     ExpiresByType text/css "access plus 1 month"
     ExpiresByType application/javascript "access plus 1 month"
-    
-    # Fonts
-    ExpiresByType font/woff "access plus 1 year"
-    ExpiresByType font/woff2 "access plus 1 year"
 </IfModule>
