@@ -1,68 +1,90 @@
 # deploy_hostinger.ps1
-# Script PowerShell untuk Auto-Deploy Laravel ke Hostinger
+# PowerShell Script - Opsi A (Single Codebase)
 
-# ================= K O N F I G U R A S I =================
-# ISI DATA INI SESUAI SSH HOSTINGER ANDA
-$SSH_IP       = "185.xxx.xxx.xxx"      # Ganti dengan IP SSH Hostinger
-$SSH_USER     = "u603012205"           # Ganti dengan Username SSH
-$SSH_PORT     = "65002"                # Port default Hostinger
-$REMOTE_PATH  = "~/public_html"        # Folder tujuan (biasanya ~/public_html atau ~/domains/domain.com/public_html)
-# =========================================================
+# ================= CONFIGURATION =================
+$SSH_IP       = "153.92.9.128"
+$SSH_USER     = "u603012205"
+$SSH_PORT     = "65002"
+$LARAVEL_PATH = "~/laravel"
+$PUBLIC_PATH  = "~/domains/homeputrainterior.com/public_html"
+# =================================================
 
-Write-Host "🚀 MEMULAI DEPLOYMENT KE HOSTINGER..." -ForegroundColor Cyan
+Write-Output ""
+Write-Output "=========================================="
+Write-Output "  DEPLOYING TO HOSTINGER (Opsi A)"
+Write-Output "=========================================="
+Write-Output ""
 
 # 1. Build Frontend
-Write-Host "`n📦 1. Building Assets (NPM)..." -ForegroundColor Yellow
+Write-Output "[1/5] Building Frontend Assets..."
 cmd /c npm run build
-if ($LASTEXITCODE -ne 0) { Write-Error "Build gagal!"; exit }
+if ($LASTEXITCODE -ne 0) { Write-Error "Build failed!"; exit }
 
-# 2. Prepare Zip
-Write-Host "`n🗜️  2. Membuat Arsip Deploy (deploy_package.zip)..." -ForegroundColor Yellow
-$exclude = @(
-    "node_modules",
-    ".git",
-    "storage/*.key",
-    "deploy_package.zip",
-    "database_export.sql",
-    "tests"
-)
+# 2. Create ZIP (excluding unnecessary files)
+Write-Output "[2/5] Creating deployment package..."
+if (Test-Path "deploy_package.zip") { Remove-Item "deploy_package.zip" -Force }
 
-# Hapus zip lama jika ada
-if (Test-Path "deploy_package.zip") { Remove-Item "deploy_package.zip" }
-
-# Zip file (Membutuhkan 7-Zip atau Compress-Archive bawaan)
-# Kita pakai Compress-Archive bawaan Powershell (agak lambat tapi pasti ada)
-# Untuk lebih cepat, exclude folder manual
-Write-Host "   Mohon tunggu, sedang mengompres file..."
-Get-ChildItem -Path . -Exclude $exclude | Compress-Archive -DestinationPath "deploy_package.zip" -Force
+$exclude = @("node_modules", ".git", "deploy_package.zip", "tests", ".vscode")
+Write-Output "      Compressing files..."
+Get-ChildItem -Path . -Exclude $exclude -Force | Compress-Archive -DestinationPath "deploy_package.zip" -Force
 
 # 3. Upload via SCP
-Write-Host "`n☁️  3. Mengupload ke Hostinger ($SSH_IP)..." -ForegroundColor Yellow
-Write-Host "   Anda mungkin diminta memasukkan password SSH..."
-scp -P $SSH_PORT "deploy_package.zip" "$SSH_USER@$SSH_IP`:$REMOTE_PATH/"
+Write-Output "[3/5] Uploading to Hostinger..."
+Write-Output "      Password: Putra031#"
+scp -o StrictHostKeyChecking=no -P $SSH_PORT "deploy_package.zip" "$SSH_USER@$SSH_IP`:~/"
 
-if ($LASTEXITCODE -ne 0) { Write-Error "Upload gagal! Cek IP/User/Password."; exit }
+if ($LASTEXITCODE -ne 0) { Write-Error "Upload failed!"; exit }
 
-# 4. Extract & Setup via SSH
-Write-Host "`n🔧 4. Eksekusi Perintah Remote (Unzip & Setup)..." -ForegroundColor Yellow
-$commands = "
-    cd $REMOTE_PATH && \
-    echo '📂 Extracting...' && \
-    unzip -o deploy_package.zip && \
-    rm deploy_package.zip && \
-    echo '📦 Installing/Updating Composer...' && \
-    composer install --optimize-autoloader --no-dev && \
-    echo '🔗 Linking Storage...' && \
-    php artisan storage:link && \
-    echo '🧹 Clearing Cache...' && \
-    php artisan optimize:clear && \
-    php artisan config:cache && \
-    php artisan route:cache && \
-    php artisan view:cache && \
-    echo '✅ SUCCESS! Website berhasil di-update.'
-"
+# 4. Remote Setup via SSH
+Write-Output "[4/5] Remote Setup..."
 
-ssh -p $SSH_PORT "$SSH_USER@$SSH_IP" $commands
+$setupCmds = @"
+# Create laravel folder
+mkdir -p $LARAVEL_PATH
 
-Write-Host "`n🎉 DEPLOYMENT SELESAI!" -ForegroundColor Green
-Read-Host "Tekan Enter untuk keluar..."
+# Extract files
+cd ~ && unzip -o deploy_package.zip -d $LARAVEL_PATH && rm deploy_package.zip
+
+# Setup .env
+cd $LARAVEL_PATH
+if [ ! -f .env ]; then cp .env.production .env; fi
+
+# Copy public files to public_html
+rm -rf $PUBLIC_PATH/*
+cp -r $LARAVEL_PATH/public/* $PUBLIC_PATH/
+cp $LARAVEL_PATH/public/.htaccess $PUBLIC_PATH/.htaccess
+
+# Set permissions
+chmod -R 755 $LARAVEL_PATH/storage
+chmod -R 755 $LARAVEL_PATH/bootstrap/cache
+
+# Create storage symlink
+rm -f $PUBLIC_PATH/storage
+ln -sf $LARAVEL_PATH/storage/app/public $PUBLIC_PATH/storage
+
+# Run Laravel commands
+cd $LARAVEL_PATH
+php artisan config:clear
+php artisan cache:clear
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+
+echo 'SUCCESS!'
+"@
+
+# Join commands into single line for SSH
+$singleLineCmds = ($setupCmds -split "`n" | Where-Object { $_ -notmatch '^\s*#' -and $_.Trim() -ne '' }) -join ' && '
+
+ssh -o StrictHostKeyChecking=no -p $SSH_PORT "$SSH_USER@$SSH_IP" $singleLineCmds
+
+# 5. Done
+Write-Output ""
+Write-Output "[5/5] DEPLOYMENT COMPLETE!"
+Write-Output ""
+Write-Output "=========================================="
+Write-Output "  Website: https://homeputrainterior.com"
+Write-Output "  Admin:   https://admin.homeputrainterior.com/login"
+Write-Output "=========================================="
+Write-Output ""
+Read-Host "Press Enter to exit..."

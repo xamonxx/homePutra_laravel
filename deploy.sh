@@ -1,71 +1,79 @@
 #!/bin/bash
 
 # =========================================
-# SCRIPT DEPLOY LARAVEL KE HOSTINGER
+# HOSTINGER DEPLOY SCRIPT - Opsi A (Single Codebase)
 # =========================================
-# Jalankan script ini via SSH di Hostinger
-# setelah upload dan extract file
+# Jalankan script ini setelah upload file ke Hostinger
+# via SSH Terminal
+# =========================================
 
-echo "🚀 Starting Laravel Deployment..."
+echo "🚀 Deploying Laravel to Hostinger..."
 
-# Set Laravel path
+# Konfigurasi path
 LARAVEL_PATH="$HOME/laravel"
-PUBLIC_PATH="$HOME/public_html"
+PUBLIC_PATH="$HOME/domains/homeputrainterior.com/public_html"
 
-# Navigate to Laravel folder
-cd $LARAVEL_PATH
+# 1. Backup public_html lama (jika ada)
+if [ -d "$PUBLIC_PATH.backup" ]; then
+    rm -rf "$PUBLIC_PATH.backup"
+fi
+if [ -d "$PUBLIC_PATH" ] && [ "$(ls -A $PUBLIC_PATH)" ]; then
+    echo "📦 Backing up old public_html..."
+    mv "$PUBLIC_PATH" "$PUBLIC_PATH.backup"
+    mkdir -p "$PUBLIC_PATH"
+fi
 
-# 1. Install Composer dependencies
-echo "📦 Installing Composer dependencies..."
-composer install --optimize-autoloader --no-dev --no-interaction
+# 2. Extract files
+echo "📂 Extracting files..."
+cd "$HOME"
+if [ -f "deploy_package.zip" ]; then
+    unzip -o deploy_package.zip -d "$LARAVEL_PATH"
+    rm deploy_package.zip
+fi
 
-# 2. Generate App Key (if not set)
-echo "🔑 Generating app key..."
-php artisan key:generate --force
+# 3. Copy public folder contents to public_html
+echo "🔗 Setting up public_html..."
+cp -r "$LARAVEL_PATH/public/"* "$PUBLIC_PATH/"
+cp "$LARAVEL_PATH/public/.htaccess" "$PUBLIC_PATH/.htaccess" 2>/dev/null || true
 
-# 3. Clear all caches
-echo "🧹 Clearing caches..."
+# 4. Setup .env
+cd "$LARAVEL_PATH"
+if [ ! -f ".env" ]; then
+    echo "⚙️ Setting up .env from .env.production..."
+    cp .env.production .env
+fi
+
+# 5. Set permissions
+echo "🔒 Setting permissions..."
+chmod -R 755 "$LARAVEL_PATH/storage"
+chmod -R 755 "$LARAVEL_PATH/bootstrap/cache"
+chmod -R 755 "$PUBLIC_PATH"
+
+# 6. Create storage symlink
+echo "🔗 Creating storage symlink..."
+rm -f "$PUBLIC_PATH/storage"
+ln -s "$LARAVEL_PATH/storage/app/public" "$PUBLIC_PATH/storage"
+
+# 7. Run artisan commands
+echo "⚡ Running Laravel optimizations..."
+cd "$LARAVEL_PATH"
+php artisan storage:link 2>/dev/null || true
 php artisan config:clear
 php artisan cache:clear
 php artisan view:clear
 php artisan route:clear
-
-# 4. Run migrations
-echo "📊 Running migrations..."
-php artisan migrate --force
-
-# 5. Seed database
-echo "🌱 Seeding database..."
-php artisan db:seed --force
-
-# 6. Create storage link
-echo "🔗 Creating storage link..."
-rm -f $PUBLIC_PATH/storage
-ln -s $LARAVEL_PATH/storage/app/public $PUBLIC_PATH/storage
-
-# 7. Set permissions
-echo "🔒 Setting permissions..."
-chmod -R 755 $LARAVEL_PATH/storage
-chmod -R 755 $LARAVEL_PATH/bootstrap/cache
-
-# 8. Optimize for production
-echo "⚡ Optimizing for production..."
 php artisan config:cache
 php artisan route:cache
 php artisan view:cache
-php artisan optimize
 
 echo ""
-echo "✅ Deployment completed!"
+echo "✅ DEPLOYMENT COMPLETE!"
 echo ""
-echo "📋 Next steps:"
-echo "   1. Update .env with your database credentials"
-echo "   2. Setup subdomain admin.homeputrainterior.com"
-echo "   3. Install SSL certificate"
-echo "   4. Test the website"
+echo "📋 Akses Website:"
+echo "   🌐 Frontend: https://homeputrainterior.com"
+echo "   🔐 Admin:    https://admin.homeputrainterior.com/login"
 echo ""
-echo "🔑 Admin Login:"
-echo "   URL: https://admin.homeputrainterior.com/login"
+echo "🔑 Default Admin Login:"
 echo "   Username: admin"
 echo "   Password: admin123"
 echo ""
