@@ -1,28 +1,8 @@
 # 🚀 DEPLOY KE HOSTINGER
 
-## Struktur di Hostinger
-```
-/home/u603012205/domains/homeputrainterior.com/public_html/
-├── app/
-├── bootstrap/
-├── config/
-├── database/
-├── public/
-│   ├── assets/
-│   ├── build/
-│   ├── index.php      ← Entry point
-│   └── .htaccess
-├── resources/
-├── routes/
-├── storage/
-├── vendor/
-├── .env
-└── artisan
-```
-
 ## Langkah Deploy
 
-### 1. Build & Zip Lokal
+### 1. Build Lokal
 ```powershell
 cd c:\laragon\www\homeputra-laravel
 npm run build
@@ -30,34 +10,49 @@ npm run build
 
 ### 2. Upload via SSH
 ```bash
-# Login
+# Login SSH
 ssh -p 65002 u603012205@153.92.9.128
 # Password: Putra031#
 
-# Bersihkan folder lama
-cd ~/domains/homeputrainterior.com
-rm -rf public_html/*
-
-# Clone dari GitHub
-cd public_html
+# Bersihkan dan clone
+cd ~/domains/homeputrainterior.com/public_html
+rm -rf * .*
 git clone https://github.com/xamonxx/homePutra_laravel.git .
 
 # Install dependencies
 composer install --no-dev --optimize-autoloader
 
-# Setup
+# Setup permissions
 chmod -R 775 storage bootstrap/cache
-php artisan storage:link
+```
+
+### 3. Setup .env
+```bash
+# Buat .env dengan konfigurasi production
+# (sudah ada di repo, tinggal pastikan database benar)
+```
+
+### 4. Copy Assets ke Root
+```bash
+# PENTING: Copy assets dan build ke root agar bisa diakses
+cp -r public/assets .
+cp -r public/build .
+```
+
+### 5. Cache Config
+```bash
 php artisan config:cache
 php artisan route:cache
 php artisan view:cache
 ```
 
-### 3. Setup Subdomain Admin
+### 6. Setup Subdomain Admin
 Di hPanel Hostinger:
 - Buat subdomain `admin`
 - Document Root: `domains/homeputrainterior.com/public_html/public`
 
-### 4. Test
+## Test
 - Frontend: https://homeputrainterior.com
 - Admin: https://admin.homeputrainterior.com/login
+  - Username: admin
+  - Password: admin123
